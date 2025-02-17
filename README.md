@@ -1,6 +1,5 @@
 # YMER
 
-```markdown
 # Projet E-Commerce PHP
 
 ## Description
