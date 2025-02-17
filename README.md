@@ -103,7 +103,7 @@ Voici un aperçu des tables présentes dans la base de données :
   - `city`
   - `postal_code`
 
-## Fonctionnalités Bonus
+## Fonctionnalités à rajouter / Bonus
 
 - **Wishlist** : Les utilisateurs peuvent ajouter des articles à leur liste de souhaits.
 - **Recherche d'articles** : Fonction de recherche permettant de trouver des articles par nom.
