@@ -1,7 +1,5 @@
 # YMER
 
-Bien sûr, voici le même README formaté en Markdown pour GitHub :
-
 ```markdown
 # Projet E-Commerce PHP
 
