@@ -1,7 +1,7 @@
 ﻿<?php
-
 session_start();
 session_destroy();
-header("Location: login.php");
+setcookie("user_id", "", time() - 3600, "/"); // Supprime le cookie
+header("Location: index.php");
 exit;
-
+?>

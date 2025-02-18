@@ -1,36 +1,51 @@
 ﻿<?php
-
-global $conn;
 session_start();
-require 'config.php';
+require 'db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST["username"]);
+    $email = trim($_POST["email"]);
     $password = $_POST["password"];
+    $remember = isset($_POST["remember"]);
 
-    $stmt = $conn->prepare("SELECT id, password FROM user WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->store_result();
-    $stmt->bind_result($user_id, $hashed_password);
-    $stmt->fetch();
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    $user = $stmt->fetch();
 
-    if ($stmt->num_rows > 0 && password_verify($password, $hashed_password)) {
-        $_SESSION["user_id"] = $user_id;
-        $_SESSION["username"] = $username;
-        header("Location: dashboard.php"); // Redirige vers une page protégée
+    if ($user && password_verify($password, $user["password"])) {
+        $_SESSION["user_id"] = $user["id"];
+        $_SESSION["username"] = $user["username"];
+        $_SESSION["role"] = $user["role"];
+
+        // Si "Se souvenir de moi" est coché, on crée un cookie valable 7 jours
+        if ($remember) {
+            setcookie("user_id", $user["id"], time() + 604800, "/", "", false, true);
+        }
+
+        header("Location: index.php");
         exit;
     } else {
-        echo "Nom d'utilisateur ou mot de passe incorrect.";
+        $error = "Identifiants incorrects.";
     }
-
-    $stmt->close();
-    $conn->close();
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h2>Connexion</h2>
+<?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
 <form method="POST">
-    <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+    <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Mot de passe" required>
+    <label><input type="checkbox" name="remember"> Se souvenir de moi</label>
     <button type="submit">Se connecter</button>
 </form>
+<p>Pas encore inscrit ? <a href="register.php">Créez un compte ici</a>.</p>
+</body>
+</html>

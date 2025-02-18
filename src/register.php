@@ -1,41 +1,59 @@
 ﻿<?php
-
-global $conn;
 session_start();
-require 'config.php';
+require 'db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"]);
-    $password = password_hash($_POST["password"], PASSWORD_BCRYPT);
+    $email = trim($_POST["email"]);
+    $password = $_POST["password"];
+    $confirm_password = $_POST["confirm_password"];
 
-    // Vérifier si l'utilisateur existe déjà
-    $checkUser = $conn->prepare("SELECT id FROM user WHERE username = ?");
-    $checkUser->bind_param("s", $username);
-    $checkUser->execute();
-    $checkUser->store_result();
-
-    if ($checkUser->num_rows > 0) {
-        echo "Ce nom d'utilisateur est déjà pris.";
+    if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
+        $error = "Tous les champs sont obligatoires.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Email invalide.";
+    } elseif ($password !== $confirm_password) {
+        $error = "Les mots de passe ne correspondent pas.";
     } else {
-        // Insérer l'utilisateur
-        $stmt = $conn->prepare("INSERT INTO user (username, password, solde, role) VALUES (?, ?, 0, 'client')");
-        $stmt->bind_param("ss", $username, $password);
-
-        if ($stmt->execute()) {
-            echo "Inscription réussie. <a href='login.php'>Connectez-vous ici</a>";
+        $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
+        $stmt->execute([$username, $email]);
+        if ($stmt->fetch()) {
+            $error = "Nom d'utilisateur ou email déjà utilisé.";
         } else {
-            echo "Erreur lors de l'inscription.";
+            $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+            $stmt = $pdo->prepare("INSERT INTO users (username, email, password, role, balance) VALUES (?, ?, ?, 'user', 0)");
+            if ($stmt->execute([$username, $email, $hashed_password])) {
+                $_SESSION["user_id"] = $pdo->lastInsertId();
+                $_SESSION["username"] = $username;
+                $_SESSION["role"] = 'user';
+                header("Location: index.php");
+                exit;
+            } else {
+                $error = "Erreur lors de l'inscription.";
+            }
         }
     }
-
-    $checkUser->close();
-    $stmt->close();
-    $conn->close();
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h2>Inscription</h2>
+<?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
 <form method="POST">
     <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+    <input type="email" name="email" placeholder="Email" required>
     <input type="password" name="password" placeholder="Mot de passe" required>
+    <input type="password" name="confirm_password" placeholder="Confirmer le mot de passe" required>
     <button type="submit">S'inscrire</button>
 </form>
+<p>Déjà inscrit ? <a href="login.php">Connectez-vous ici</a>.</p>
+</body>
+</html>
