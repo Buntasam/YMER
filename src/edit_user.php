@@ -33,6 +33,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier l'utilisateur</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <h1>Modifier l'utilisateur : <?php echo $user['username']; ?></h1>
