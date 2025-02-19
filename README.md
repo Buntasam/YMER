@@ -49,18 +49,34 @@ Ce projet consiste en la création d'un site de e-commerce entièrement dévelop
    git clone https://github.com/Buntasam/YMER
    ```
 
-2. Placez le dossier cloné dans le répertoire `htdocs` de votre serveur XAMPP/MAMP/LAMP.
+2. Créez un nouveau dossier dans le répertoire `htdocs` de votre serveur XAMPP/MAMP/LAMP nommé "ymerch".
 
-3. Créez une base de données dans phpMyAdmin et importez le fichier `php_exam_db.sql` situé à la racine du projet.
+3. Placez le dossier cloné dans le répertoire `htdocs/ymerch` de votre serveur XAMPP/MAMP/LAMP.
 
-4. Lancez Apache et MySQL via XAMPP/MAMP/LAMP.
+4. Modifiez la ligne le fichier `index.php` situé dans le dossier `htdocs` pour que votre serveur redirige par défaut sur les pages du site :
+Original :
+   ```
+   ...
+   header('Location: '.$uri.'/dashboard/');
+   ...
+   ```
+Modification :
+   ```
+   ...
+   header('Location: '.$uri.'/ymerch/');
+   ...
+   ```
 
-5. Ouvrez votre navigateur et accédez à l'adresse suivante :
+5. Créez une base de données dans phpMyAdmin et importez le fichier `php_exam_db.sql` situé à la racine du projet.
+
+6. Lancez Apache et MySQL via XAMPP/MAMP/LAMP.
+
+7. Ouvrez votre navigateur et accédez à l'adresse suivante :
    ```
    http://localhost/..............
    ```
 
-6. Vous pouvez maintenant tester le site avec les fonctionnalités décrites.
+8. Vous pouvez maintenant tester le site avec les fonctionnalités décrites.
 
 ## Structure de la Base de Données
 
