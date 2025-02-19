@@ -21,6 +21,7 @@ $articles = $stmt->fetchAll();
         <a href="index.php">Accueil</a>
         <?php if (isset($_SESSION['user_id'])): ?>
             <a href="sell.php">Vendre</a>
+            <a href="profile.php">Profil</a>
             <?php if ($_SESSION['role'] === 'admin'): ?>
                 <a href="admin.php">Admin</a>
             <?php endif; ?>
