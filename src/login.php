@@ -35,18 +35,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="loginregister.css">
 </head>
 <body>
 <h2>Connexion</h2>
 <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
 <form method="POST">
+    <p>Email</p>
     <input type="email" name="email" placeholder="Email" required>
+    <p>Mot de passe</p>
     <input type="password" name="password" placeholder="Mot de passe" required>
     <label><input type="checkbox" name="remember"> Se souvenir de moi</label>
     <button type="submit">Se connecter</button>
 </form>
-<p>Pas encore inscrit ? <a href="register.php">Créez un compte ici</a>.</p>
-<p><a href="index.php" class="button">Retour à l'accueil</a></p>
+<p class="center-text">Pas encore inscrit ? <a href="register.php">Créez un compte ici</a>.</p>
 </body>
 </html>
