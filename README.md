@@ -54,13 +54,13 @@ Ce projet consiste en la création d'un site de e-commerce entièrement dévelop
 3. Placez le dossier cloné dans le répertoire `htdocs/ymerch` de votre serveur XAMPP/MAMP/LAMP.
 
 4. Modifiez la ligne le fichier `index.php` situé dans le dossier `htdocs` pour que votre serveur redirige par défaut sur les pages du site :
-Original :
+- **Original :**
    ```
    ...
    header('Location: '.$uri.'/dashboard/');
    ...
    ```
-Modification :
+- **Modification :**
    ```
    ...
    header('Location: '.$uri.'/ymerch/');
