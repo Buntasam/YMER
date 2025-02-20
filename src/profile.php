@@ -11,16 +11,16 @@ $user_id = $_SESSION['user_id'];
 $error = '';
 $success = '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") { // Submit profile modifications
     $current_password = $_POST["current_password"];
     $stmt = $pdo->prepare("SELECT password FROM users WHERE id = ?");
     $stmt->execute([$user_id]);
     $user = $stmt->fetch();
 
-    if (!password_verify($current_password, $user['password'])) {
+    if (!password_verify($current_password, $user['password'])) { // Check if current password is correct
         $error = "Mot de passe actuel incorrect.";
     } else {
-        if (!empty($_POST["username"])) {
+        if (!empty($_POST["username"])) { // Change username
             $username = trim($_POST["username"]);
             $stmt = $pdo->prepare("UPDATE users SET username = ? WHERE id = ?");
             $stmt->execute([$username, $user_id]);
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $success = "Nom d'utilisateur mis à jour.";
         }
 
-        if (!empty($_POST["email"])) {
+        if (!empty($_POST["email"])) { // Change email
             $email = trim($_POST["email"]);
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $stmt = $pdo->prepare("UPDATE users SET email = ? WHERE id = ?");
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        if (!empty($_POST["new_password"]) && !empty($_POST["confirm_password"])) {
+        if (!empty($_POST["new_password"]) && !empty($_POST["confirm_password"])) { // Change password
             $new_password = $_POST["new_password"];
             $confirm_password = $_POST["confirm_password"];
             if ($new_password === $confirm_password) {
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        if (!empty($_FILES["avatar"]["name"])) {
+        if (!empty($_FILES["avatar"]["name"])) { // Change profile picture
             $avatar = $_FILES["avatar"];
             if ($avatar['error'] == UPLOAD_ERR_OK) {
                 $image_path = 'uploads/profilepic/' . basename($avatar['name']);
@@ -77,7 +77,7 @@ $user = $stmt->fetch();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil</title>
+    <title>Profil - Ymerch</title>
     <link rel="stylesheet" href="profile.css">
 </head>
 <body>
@@ -102,7 +102,7 @@ $user = $stmt->fetch();
 <div class="profile-container">
     <h2>Profil de <?= htmlspecialchars($user['username']) ?></h2>
 
-    <!-- Messages erreur -->
+    <!-- Error messages -->
     <?php if ($error): ?>
         <p style="color:red"><?= $error ?></p>
     <?php endif; ?>
@@ -110,10 +110,10 @@ $user = $stmt->fetch();
         <p style="color:green"><?= $success ?></p>
     <?php endif; ?>
 
-    <!-- Image profil -->
+    <!-- Profile picture -->
     <img src="<?= htmlspecialchars($user['avatar']) ?>" alt="Image de profil" />
 
-    <!-- Form edition profil -->
+    <!-- Form profile edit -->
     <form method="POST" enctype="multipart/form-data">
         <label for="username">Nom d'utilisateur :</label>
         <input type="text" id="username" name="username" value="<?= htmlspecialchars($user['username']) ?>" placeholder="Nom d'utilisateur">

@@ -85,36 +85,36 @@ header nav a:hover {
 
 /* Profile Container */
 .profile-container {
-    max-width: 600px; /* Largeur maximale du bloc */
-    margin: 50px auto; /* Centrer le bloc */
-    background-color: #fff; /* Fond blanc */
-    padding: 20px; /* Espacement interne */
-    border-radius: 8px; /* Coins arrondis */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    max-width: 600px;
+    margin: 50px auto; /* Center container */
+    background-color: #fff;
+    padding: 20px; /* Internal spacing */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Profile Image */
+/* Profile Picture */
 .profile-container img {
-    display: block; /* Centrer l'image */
-    margin: 20px auto; /* Espacement autour de l'image */
-    width: 150px; /* Taille fixe de l'image */
+    display: block;
+    margin: 20px auto;
+    width: 150px;
     height: 150px; 
-    border-radius: 50%; /* Image ronde */
-    object-fit: cover; /* Remplir le cadre rond correctement */
+    border-radius: 50%; /* Round picture */
+    object-fit: cover;
 }
 
-/* Formulaire d'édition du profil */
+/* Profile edit form */
 form {
-    display: flex; /* Aligner les éléments verticalement */
+    display: flex; /* Align elements vertically */
     flex-direction: column; 
 }
 
 form input[type="file"] {
-    margin-bottom: 15px; /* Espacement sous le champ de fichier */
+    margin-bottom: 15px; /* Spacing under the file field */
 }
 
 form button {
-    background-color: #4caf50; /* Couleur du bouton (vert) */
+    background-color: #4caf50;
     color: white; 
     border-radius: 5px; 
     padding: 10px; 
@@ -125,15 +125,15 @@ form button {
 }
 
 form button:hover {
-    background-color: #55ca58; /* Couleur plus claire au survol */
+    background-color: #55ca58;
 }
 
-/* Informations utilisateur */
+/* User info */
 .user-info p {
     font-size: 16px; 
 }
 
-/* Messages d'erreur et de succès */
+/* Errorr messages */
 .profile-container p[style="color:red"] {
    text-align:center
 }

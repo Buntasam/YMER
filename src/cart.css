@@ -124,38 +124,7 @@ div a:hover {
     transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-/* Footer */
-footer {
-    background-color: #232f3e;
-    color: #fff;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: 20px;
-    font-size: 14px;
-}
-
-/* Animations */
-@keyframes fade-in {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slide-down {
-    0% {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
+/* Table Style */
 
 .cart-container {
     max-width: 800px;
@@ -187,4 +156,27 @@ footer {
 
 .cart-total {
     margin-top: 20px;
+}
+
+/* Animations */
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-down {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

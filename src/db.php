@@ -4,6 +4,7 @@ $dbname = 'ymerch';
 $username = 'root';  // Modifie si besoin
 $password = '';      // Modifie si besoin
 
+// Database connection
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

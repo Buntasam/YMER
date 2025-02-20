@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     $confirm_password = $_POST["confirm_password"];
 
-    if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
+    if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) { // Check if any field is empty
         $error = "Tous les champs sont obligatoires.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = "Email invalide.";
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $error = "Nom d'utilisateur ou email déjà utilisé.";
         } else {
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-            $stmt = $pdo->prepare("INSERT INTO users (username, email, password, role, balance, avatar) VALUES (?, ?, ?, 'user', 0, 'uploads/profilepic/default.jpg')");
+            $stmt = $pdo->prepare("INSERT INTO users (username, email, password, role, balance, avatar) VALUES (?, ?, ?, 'user', 0, 'uploads/profilepic/default.jpg')"); // Default avatar and create user
             if ($stmt->execute([$username, $email, $hashed_password])) {
                 $_SESSION["user_id"] = $pdo->lastInsertId();
                 $_SESSION["username"] = $username;
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription</title>
+    <title>Inscription - Ymerch</title>
     <link rel="stylesheet" href="loginregister.css">
 </head>
 <body>

@@ -1,4 +1,4 @@
-/* Styles de base */
+/* Global Syles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -27,7 +27,7 @@ h2 {
     color: #232f3e;
 }
 
-/* Conteneur du formulaire */
+/* Form container */
 form {
     max-width: 400px;
     margin: 30px auto;
@@ -40,7 +40,7 @@ form {
     gap: 15px;
 }
 
-/* Champs de saisie */
+/* Input fields */
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -60,7 +60,7 @@ input[type="password"]:focus {
     outline: none;
 }
 
-/* Bouton de soumission */
+/* Submit button */
 button[type="submit"] {
     background-color: #232f3e;
     color: #fff;
@@ -77,7 +77,7 @@ button[type="submit"]:hover {
     transform: scale(1.05);
 }
 
-/* Case à cocher */
+/* Check box */
 label {
     font-size: 14px;
     display: flex;
@@ -99,7 +99,7 @@ p {
     margin: 0;
 }
 
-/* Liens sous forme de texte */
+/* Links in text format */
 p a {
     font-size: 14px;
     font-weight: bold;
@@ -110,7 +110,7 @@ p a {
 }
 
 
-/* Animation slide-in pour le formulaire */
+/* Form slide-in animation */
 form {
     opacity: 0;
     transform: translateY(20px);

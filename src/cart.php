@@ -20,7 +20,7 @@ $cart_items = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panier</title>
+    <title>Panier - Ymerch</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -44,7 +44,7 @@ $cart_items = $stmt->fetchAll();
                 <td><?= number_format($item['price'], 2) ?> €</td>
                 <td><?= number_format($item['price'] * $item['quantity'], 2) ?> €</td>
                 <td>
-                    <form action="remove_from_cart.php" method="post">
+                    <form action="remove_from_cart.php" method="post"> <!-- Remove item from cart form -->
                         <input type="hidden" name="article_id" value="<?= $item['article_id'] ?>">
                         <button type="submit">Retirer</button>
                     </form>
@@ -54,7 +54,7 @@ $cart_items = $stmt->fetchAll();
         </tbody>
     </table>
     <a href="checkout.php">Passer à la caisse</a>
-<?php else: ?>
+<?php else: ?> <!-- If cart is empty -->
     <p>Votre panier est vide.</p>
 <?php endif; ?>
 <p><a href="/">Continuer vos achats</a></p>

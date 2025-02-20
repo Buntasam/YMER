@@ -78,50 +78,50 @@ h2 {
 /* Table Styles */
 table {
     width: 100%;
-    border-collapse: collapse; /* Supprime les espaces entre les bordures */
+    border-collapse: collapse; /* Delete spaces between borders */
     margin-top: 20px;
 }
 
 table th, table td {
-    border: 1px solid #ddd; /* Bordures des cellules */
-    padding: 10px; /* Espacement interne des cellules */
-    text-align: left; /* Alignement du texte */
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
 }
 
 table th {
-    background-color: #232f3e; /* Couleur de fond des en-têtes */
-    color: white; /* Couleur du texte des en-têtes */
+    background-color: #232f3e;
+    color: white;
 }
 
 table tr:nth-child(even) {
-    background-color: #f9f9f9; /* Couleur de fond pour les lignes paires */
+    background-color: #f9f9f9; /* Background color for even lines */
 }
 
 table tr:hover {
-    background-color: #f1f1f1; /* Couleur de fond au survol */
+    background-color: #f1f1f1; /* Hover background color */
 }
 
 /* Action Links */
 table td a {
-    display: inline-block; /* Pour un meilleur contrôle des marges et espacements */
-    margin-right: 10px; /* Espacement entre les liens */
-    padding: 5px 10px; /* Espacement interne pour un bouton-like */
-    border-radius: 4px; /* Coins arrondis */
+    display: inline-block; 
+    margin-right: 10px;
+    padding: 5px 10px;
+    border-radius: 4px;
 }
 
 table td a:hover {
-    background-color: #0073bb; /* Fond bleu au survol */
-    color: white; /* Texte blanc au survol */
+    background-color: #0073bb;
+    color: white;
 }
 
-/* Modifier et supprimer boutons spécifiques */
-table td a[href*="edit_user"] {
-    background-color: #4caf50; /* Vert pour modifier */
+
+table td a[href*="edit_user"] { /* Edit button (green) */
+    background-color: #4caf50;
     color: white; 
 }
 
-table td a[href*="delete_user"] {
-    background-color: #e74c3c; /* Rouge pour supprimer */
+table td a[href*="delete_user"] { /* Delete button (red) */
+    background-color: #e74c3c;
     color:white
 }
 

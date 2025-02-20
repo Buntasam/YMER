@@ -1,4 +1,3 @@
-/* Global Styles */
 /* Header */
 header {
     background-color: #232f3e;
@@ -29,6 +28,8 @@ header nav a:hover {
     transform: scale(1.1);
     transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
 }
+
+/* Global Styles */
 
 body {
     font-family: Arial, sans-serif;
@@ -75,12 +76,12 @@ form textarea {
     font-size: 14px;
     border-radius: 5px;
     border: 1px solid #ddd;
-    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+    box-sizing: border-box; /* Includes padding in total width */
 }
 
 form textarea {
-    resize: vertical; /* Permet de redimensionner uniquement verticalement */
-    height: 100px; /* Hauteur par défaut pour les descriptions longues */
+    resize: vertical; /* Resize vertically only */
+    height: 100px; /* Default height for long descriptions */
 }
 
 form button {
@@ -93,12 +94,12 @@ form button {
     color: #fff;
     background-color: #4caf50;
     border-radius: 5px;
-    border: none; /* Retire les bordures par défaut */
-    cursor: pointer; /* Change le curseur au survol */
+    border: none;
+    cursor: pointer;
 }
 
 form button:hover {
-    background-color: #55ca58; /* Couleur plus foncée au survol */
+    background-color: #55ca58;
 }
 
 /* Success and Error Messages */
@@ -107,30 +108,30 @@ form p {
 }
 
 form p[style="color:red;"] {
-    color: red; /* Message d'erreur en rouge */
+    color: red; /* Eror message in red */
 }
 
 form p[style="color:green;"] {
-    color: green; /* Message de succès en vert */
+    color: green; /* Success message in green */
 }
 
 /* Back to Home Link */
 p a {
-    display: inline-block; /* Rend le lien plus visible */
+    display: inline-block;
     margin-top: 20px;
-    text-align: center; /* Centre le texte */
+    text-align: center;
 }
 
 p a:hover {
-    color: #ff9900; /* Change la couleur au survol */
+    color: #ff9900;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     form {
-        padding: 15px; /* Réduit les marges internes sur petits écrans */
+        padding: 15px; /* Reduces internal margins on small screens */
         width: calc(100% - 30px);
-        box-sizing: border-box; /* Ajuste la largeur totale avec le padding inclus */
+        box-sizing: border-box; /* Adjusts total width with padding included */
         margin-left:auto
 }
 }

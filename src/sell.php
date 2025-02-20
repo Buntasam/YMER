@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_SESSION['user_id'];
     $image_path = 'default.jpg';
 
-    if (empty($name) || empty($slug) || empty($description) || empty($price)) {
+    if (empty($name) || empty($slug) || empty($description) || empty($price)) { // Check if all fields are filled
         $error = "Tous les champs sont obligatoires.";
     } else {
         if (!empty($_FILES["image"]["name"])) {
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        $stmt = $pdo->prepare("INSERT INTO articles (name, slug, description, price, image_url, user_id) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO articles (name, slug, description, price, image_url, user_id) VALUES (?, ?, ?, ?, ?, ?)"); // Insert article into database
         if ($stmt->execute([$name, $slug, $description, $price, $image_path, $user_id])) {
             $success = "Article ajouté avec succès.";
         } else {
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ymerch - Vendre</title>
+    <title>Créer une vente - Ymerch</title>
     <base href="http://localhost/ymerch/">
     <link rel="stylesheet" href="sell.css">
 </head>

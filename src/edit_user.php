@@ -1,8 +1,8 @@
 ﻿<?php
 session_start();
-include('db.php'); // Connexion à la base de données
+include('db.php'); // Database connection
 
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') { // Check if user is logged and admin
     header('Location: /login');
     exit;
 }

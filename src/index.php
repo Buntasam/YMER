@@ -2,7 +2,7 @@
 session_start();
 require 'db.php';
 
-$stmt = $pdo->prepare("SELECT a.*, u.username FROM articles a JOIN users u ON a.user_id = u.id ORDER BY a.created_at DESC");
+$stmt = $pdo->prepare("SELECT a.*, u.username FROM articles a JOIN users u ON a.user_id = u.id ORDER BY a.created_at DESC"); // SQL request to get all articles
 $stmt->execute();
 $articles = $stmt->fetchAll();
 ?>
@@ -22,12 +22,12 @@ $articles = $stmt->fetchAll();
         <?php if (isset($_SESSION['user_id'])): ?>
             <a href="product/create">Vendre</a>
             <a href="profile">Profil</a>
-            <?php if ($_SESSION['role'] === 'admin'): ?>
+            <?php if ($_SESSION['role'] === 'admin'): ?> <!-- If user have admin role, admin panel button is displayed -->
                 <a href="admin">Admin</a>
             <?php endif; ?>
             <a href="cart.php">Panier</a>
             <a href="logout.php">Déconnexion</a>
-            <div class="user-info">
+            <div class="user-info"> <!-- Profile pic and name at the right of menu -->
                 <img src="<?= htmlspecialchars($_SESSION['avatar']) ?>" alt="Photo de profil" class="profile-picture">
                 <a href="profile.php" class="username-link"><?= htmlspecialchars($_SESSION['username']) ?></a>
             </div>
@@ -35,21 +35,21 @@ $articles = $stmt->fetchAll();
             <a href="login">Connexion</a>
             <a href="register">Inscription</a>
         <?php endif; ?>
-        <!-- Si l'utilisateur est pas connecté, pour que Panier soit affiché a droite -->
+        <!-- If user isn't logged in, Cart button is displayed on the right -->
         <?php if (!isset($_SESSION['user_id'])): ?>
             <a href="cart">Panier</a>
         <?php endif; ?>
     </nav>
 </header>
 
-<?php if (isset($_SESSION['user_id'])): ?>
+<?php if (isset($_SESSION['user_id'])): ?> <!-- Custom welcome message if user is logged in -->
     <h1>Bienvenue sur Ymerch <?= htmlspecialchars($_SESSION['username']) ?></h1>
     <?php else: ?>
         <h1>Bienvenue sur Ymerch</h1>
     <?php endif; ?>
 
 <div class="products-container">
-    <?php foreach ($articles as $article): ?>
+    <?php foreach ($articles as $article): ?> <!-- Product display -->
         <div class="product-card">
             <h2><?= htmlspecialchars($article["name"]) ?></h2>
             <p><?= htmlspecialchars(substr($article["description"], 0, 100)) ?>...</p>
@@ -60,7 +60,7 @@ $articles = $stmt->fetchAll();
                 <input type="hidden" name="article_id" value="<?= $article['id'] ?>">
                 <button type="submit">Ajouter au panier</button>
             </form>
-            <?php if ($article["image_url"] !== 'default.jpg'): ?>
+            <?php if ($article["image_url"] !== 'default.jpg'): ?> <!-- Custom product picture if defined -->
                 <img src="<?= $article["image_url"] ?>" alt="<?= htmlspecialchars($article["name"]) ?>" style="width:100%; max-height:150px; object-fit:cover;">
             <?php else: ?>
                 <div style="width:100%; height:150px; background-color:grey;"></div>

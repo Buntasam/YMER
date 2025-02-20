@@ -11,13 +11,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute([$email]);
     $user = $stmt->fetch();
 
-    if ($user && password_verify($password, $user["password"])) {
+    if ($user && password_verify($password, $user["password"])) { // If user exists and password is correct, save user data in session
         $_SESSION["user_id"] = $user["id"];
         $_SESSION["username"] = $user["username"];
         $_SESSION["role"] = $user["role"];
         $_SESSION['avatar'] = $user['avatar'];
 
-        // Si "Se souvenir de moi" est coché, on crée un cookie valable 7 jours
+        // If "Remember me" is checked, we create a cookie valid for 7 days
         if ($remember) {
             setcookie("user_id", $user["id"], time() + 604800, "/", "", false, true);
         }
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Connexion - Ymerch</title>
     <link rel="stylesheet" href="loginregister.css">
 </head>
 <body>

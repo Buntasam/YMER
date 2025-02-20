@@ -55,14 +55,14 @@ header nav a:hover {
     transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-/* Style pour la section user dans le footer */
+/* User section in footer style */
 .user-info {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.user-info img.profile-picture {
+.user-info img.profile-picture { /* User profile picture resizing */
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -113,6 +113,55 @@ div {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
+}
+
+/* Main container */
+.products-container {
+    display: flex;
+    flex-wrap: wrap; /* Moves to a new line if necessary */
+    gap: 20px; /* Card spacing */
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* Card products style */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: calc(33.333% - 20px); /* Trois colonnes avec espace entre elles */
+    box-sizing: border-box; /* Inclut padding et bordures dans la largeur totale */
+}
+
+/* Product picture */
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* Product title */
+.product-card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Button and title */
+.product-card p {
+    font-size: 14px;
+    color: #555;
+}
+
+.product-card a,
+.product-card button {
+    display: inline-block;
+    margin-top: 10px;
 }
 
 /* Product Item */
@@ -170,55 +219,6 @@ div a:hover {
         transform: translateY(0);
         opacity: 1;
     }
-}
-
-/* Conteneur principal */
-.products-container {
-    display: flex;
-    flex-wrap: wrap; /* Permet de passer à une nouvelle ligne si nécessaire */
-    gap: 20px; /* Espacement entre les cartes */
-    justify-content: space-between; /* Espace entre les éléments */
-    padding: 20px;
-}
-
-/* Style des cartes produits */
-.product-card {
-    display: flex;
-    flex-direction: column; /* Contenu empilé verticalement */
-    justify-content: space-between;
-    align-items: center;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    width: calc(33.333% - 20px); /* Trois colonnes avec espace entre elles */
-    box-sizing: border-box; /* Inclut padding et bordures dans la largeur totale */
-}
-
-/* Image du produit */
-.product-card img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-/* Titre du produit */
-.product-card h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-/* Texte et bouton */
-.product-card p {
-    font-size: 14px;
-    color: #555;
-}
-
-.product-card a,
-.product-card button {
-    display: inline-block;
-    margin-top: 10px;
 }
 
 /* Modal styles */

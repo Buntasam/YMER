@@ -1,14 +1,14 @@
 ﻿<?php
 session_start();
-include('db.php'); // Connexion à la base de données
+include('db.php'); // Database connection
 
-// Vérifier si l'utilisateur est admin
+// Check if user is admin
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header('Location: /login'); // Rediriger vers la page de connexion si non admin
+    header('Location: /login'); // Redirect to login page if not admin
     exit;
 }
 
-// Récupérer les utilisateurs
+// Fetch users
 $sql = "SELECT * FROM users LIMIT 25";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
@@ -20,7 +20,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panneau d'administration</title>
+    <title>Panneau d'administration - Ymerch</title>
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
@@ -31,7 +31,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li><a href="logout.php">Déconnexion</a></li>
         </ul>
     </nav>
-    <!-- Formulaire de recherche -->
+    <!-- Search form -->
     <form method="GET" action="" class="search-form">
     <input type="text" name="search" placeholder="Rechercher un utilisateur..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
     <div class="radio-buttons">
@@ -68,8 +68,8 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <td><?php echo $user['email']; ?></td>
                 <td><?php echo $user['role']; ?></td>
                 <td>
-                    <a href="edit_user.php?id=<?php echo $user['id']; ?>">Modifier</a>
-                    <a href="delete_user.php?id=<?php echo $user['id']; ?>">Supprimer</a>
+                    <a href="edit_user.php?id=<?php echo $user['id']; ?>">Modifier</a> <!-- BOuton edit -->
+                    <a href="delete_user.php?id=<?php echo $user['id']; ?>">Supprimer</a> <!-- Bouton delete -->
                     <?php if ($user['role'] !== 'admin'): ?>
                         <a href="make_admin.php?id=<?php echo $user['id']; ?>">Promouvoir Admin</a>
                     <?php endif; ?>
