@@ -16,17 +16,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = trim($_POST["description"]);
     $price = $_POST["price"];
     $user_id = $_SESSION['user_id'];
-    $image_path = 'uploads/default.jpg';
+    $image_path = 'default.jpg';
 
     if (empty($name) || empty($slug) || empty($description) || empty($price)) {
         $error = "Tous les champs sont obligatoires.";
     } else {
         if (!empty($_FILES["image"]["name"])) {
             $image = $_FILES["image"];
-            $target_dir = "uploads/";
-            $target_file = $target_dir . basename($image["name"]);
-            if (move_uploaded_file($image["tmp_name"], $target_file)) {
-                $image_path = $target_file;
+            if ($image['error'] == UPLOAD_ERR_OK) {
+                $image_path = 'uploads/' . basename($image['name']);
+                move_uploaded_file($image['tmp_name'], $image_path);
             } else {
                 $error = "Erreur lors du téléchargement de l'image.";
             }
@@ -47,10 +46,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vendre</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Ymerch - Vendre</title>
+    <link rel="stylesheet" href="sell.css">
 </head>
 <body>
+    <header>
+        <nav>
+            <a href="index.php">Accueil</a>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <a href="sell.php">Vendre</a>
+                <a href="profile.php">Profil</a>
+                <?php if ($_SESSION['role'] === 'admin'): ?>
+                    <a href="admin.php">Admin</a>
+                <?php endif; ?>
+                <a href="logout.php">Déconnexion</a>
+            <?php else: ?>
+                <a href="login.php">Connexion</a>
+                <a href="register.php">Inscription</a>
+            <?php endif; ?>
+            <a href="cart.php">Panier</a>
+        </nav>
+    </header>
 <h2>Vendre un article</h2>
 <?php if ($error) echo "<p style='color:red;'>$error</p>"; ?>
 <?php if ($success) echo "<p style='color:green;'>$success</p>"; ?>

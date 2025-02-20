@@ -1,0 +1,136 @@
+/* Global Styles */
+/* Header */
+header {
+    background-color: #232f3e;
+    color: #fff;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease-in-out;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav a {
+    margin: 0 15px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    color: #febd69;
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+a {
+    color: #0073bb;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #ff9900;
+}
+
+h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+/* Form Container */
+form {
+    max-width: 600px;
+    margin: 30px auto;
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"],
+form input[type="number"],
+form input[type="file"],
+form textarea {
+    width: calc(100% - 20px);
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+form textarea {
+    resize: vertical; /* Permet de redimensionner uniquement verticalement */
+    height: 100px; /* Hauteur par défaut pour les descriptions longues */
+}
+
+form button {
+    display: block;
+    width: calc(100% - 20px);
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #4caf50;
+    border-radius: 5px;
+    border: none; /* Retire les bordures par défaut */
+    cursor: pointer; /* Change le curseur au survol */
+}
+
+form button:hover {
+    background-color: #55ca58; /* Couleur plus foncée au survol */
+}
+
+/* Success and Error Messages */
+form p {
+    text-align: center;
+}
+
+form p[style="color:red;"] {
+    color: red; /* Message d'erreur en rouge */
+}
+
+form p[style="color:green;"] {
+    color: green; /* Message de succès en vert */
+}
+
+/* Back to Home Link */
+p a {
+    display: inline-block; /* Rend le lien plus visible */
+    margin-top: 20px;
+    text-align: center; /* Centre le texte */
+}
+
+p a:hover {
+    color: #ff9900; /* Change la couleur au survol */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    form {
+        padding: 15px; /* Réduit les marges internes sur petits écrans */
+        width: calc(100% - 30px);
+        box-sizing: border-box; /* Ajuste la largeur totale avec le padding inclus */
+        margin-left:auto
+}
+}
