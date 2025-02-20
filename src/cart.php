@@ -1,5 +1,18 @@
 <?php
 session_start();
+require 'db.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+
+// Fetch cart items for the user
+$stmt = $pdo->prepare("SELECT c.*, a.name, a.price FROM cart c JOIN articles a ON c.article_id = a.id WHERE c.user_id = ?");
+$stmt->execute([$user_id]);
+$cart_items = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -7,69 +20,43 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panier - Ymerch</title>
-    <link rel="stylesheet" href="cart.css">
+    <title>Panier</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-    <nav>
-        <a href="index.php">Accueil</a>
-        <?php if (isset($_SESSION['user_id'])): ?>
-            <a href="sell.php">Vendre</a>
-            <a href="profile.php">Profil</a>
-            <?php if ($_SESSION['role'] === 'admin'): ?>
-                <a href="admin.php">Admin</a>
-            <?php endif; ?>
-            <a href="logout.php">Déconnexion</a>
-        <?php else: ?>
-            <a href="login.php">Connexion</a>
-            <a href="register.php">Inscription</a>
-        <?php endif; ?>
-        <a href="cart.php">Panier</a>
-    </nav>
-</header>
-
-<h1>Votre Panier</h1>
-
-<div class="cart-container">
-    <?php if (!empty($_SESSION['cart'])): ?>
-        <table class="cart-table">
-            <thead>
-                <tr>
-                    <th>Article</th>
-                    <th>Prix Unitaire</th>
-                    <th>Quantité</th>
-                    <th>Total</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                $total = 0;
-                foreach ($_SESSION['cart'] as $item): 
-                    $item_total = $item['price'] * $item['quantity'];
-                    $total += $item_total;
-                ?>
-                    <tr>
-                        <td><?= htmlspecialchars($item['name']) ?></td>
-                        <td><?= number_format($item['price'], 2) ?> €</td>
-                        <td><?= $item['quantity'] ?></td>
-                        <td><?= number_format($item_total, 2) ?> €</td>
-                        <td><a href="remove_from_cart.php?id=<?= $item['id'] ?>">Retirer</a></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-
-        <div class="cart-total">
-            <p>Total du Panier : <?= number_format($total, 2) ?> €</p>
-            <button onclick="window.location.href='checkout.php'">Passer à la caisse</button>
-        </div>
-
-    <?php else: ?>
-        <p>Votre panier est vide.</p>
-    <?php endif; ?>
-</div>
-
+<h2>Votre Panier</h2>
+<?php if (count($cart_items) > 0): ?>
+    <table>
+        <thead>
+        <tr>
+            <th>Article</th>
+            <th>Quantité</th>
+            <th>Prix</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($cart_items as $item): ?>
+            <tr>
+                <td><?= htmlspecialchars($item['name']) ?></td>
+                <td><?= $item['quantity'] ?></td>
+                <td><?= number_format($item['price'], 2) ?> €</td>
+                <td><?= number_format($item['price'] * $item['quantity'], 2) ?> €</td>
+                <td>
+                    <form action="remove_from_cart.php" method="post">
+                        <input type="hidden" name="article_id" value="<?= $item['article_id'] ?>">
+                        <button type="submit">Retirer</button>
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+    <a href="checkout.php">Passer à la caisse</a>
+<?php else: ?>
+    <p>Votre panier est vide.</p>
+<?php endif; ?>
+<p><a href="index.php">Continuer vos achats</a></p>
 </body>
 </html>

@@ -1,21 +1,19 @@
 <?php
 session_start();
+require 'db.php';
 
-// Récupération ID de l'article à supprimer
-$article_id = $_GET['id'];
-
-// Parcours du panier et suppression l'article correspondant
-foreach ($_SESSION['cart'] as $key => $item) {
-    if ($item['id'] == $article_id) {
-        unset($_SESSION['cart'][$key]);
-        break;
-    }
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
 }
 
-// Réindex du tableau du panier
-$_SESSION['cart'] = array_values($_SESSION['cart']);
+$user_id = $_SESSION['user_id'];
+$article_id = $_POST['article_id'];
 
-// Redirection vers la page du panier
-header('Location: cart.php');
+// Remove item from the cart
+$stmt = $pdo->prepare("DELETE FROM cart WHERE user_id = ? AND article_id = ?");
+$stmt->execute([$user_id, $article_id]);
+
+header("Location: cart.php");
 exit;
 ?>

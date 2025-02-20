@@ -1,37 +1,31 @@
 <?php
 session_start();
+require 'db.php';
 
-// Panier existe dans la session
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
 }
 
-// Récupération de l'article depuis le form
+$user_id = $_SESSION['user_id'];
 $article_id = $_POST['article_id'];
-$article_name = $_POST['article_name'];
-$article_price = $_POST['article_price'];
+$quantity = 1; // Default quantity
 
-// Verification article déjà présent dans le panier
-$found = false;
-foreach ($_SESSION['cart'] as &$item) {
-    if ($item['id'] == $article_id) {
-        $item['quantity'] += 1; // Incrémente la quantité si déjà présent
-        $found = true;
-        break;
-    }
+// Check if the item is already in the cart
+$stmt = $pdo->prepare("SELECT * FROM cart WHERE user_id = ? AND article_id = ?");
+$stmt->execute([$user_id, $article_id]);
+$cart_item = $stmt->fetch();
+
+if ($cart_item) {
+    // Update quantity if item already exists in the cart
+    $stmt = $pdo->prepare("UPDATE cart SET quantity = quantity + 1 WHERE user_id = ? AND article_id = ?");
+    $stmt->execute([$user_id, $article_id]);
+} else {
+    // Insert new item into the cart
+    $stmt = $pdo->prepare("INSERT INTO cart (user_id, article_id, quantity) VALUES (?, ?, ?)");
+    $stmt->execute([$user_id, $article_id, $quantity]);
 }
 
-if (!$found) {
-    // Ajoute un nouvel article au panier
-    $_SESSION['cart'][] = [
-        'id' => $article_id,
-        'name' => $article_name,
-        'price' => $article_price,
-        'quantity' => 1
-    ];
-}
-
-// Rediriger vers le panier ou la page précédente
-header('Location: cart.php');
+header("Location: cart.php");
 exit;
 ?>
