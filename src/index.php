@@ -18,11 +18,12 @@ $articles = $stmt->fetchAll();
 <body>
 <header>
     <nav>
-        <a href="index.php">Accueil</a>
+        <a href="/">Accueil</a>
         <?php if (isset($_SESSION['user_id'])): ?>
-            <a href="sell.php">Vendre</a>
+            <a href="product/create">Vendre</a>
+            <a href="profile">Profil</a>
             <?php if ($_SESSION['role'] === 'admin'): ?>
-                <a href="admin.php">Admin</a>
+                <a href="admin">Admin</a>
             <?php endif; ?>
             <a href="cart.php">Panier</a>
             <a href="logout.php">Déconnexion</a>
@@ -31,12 +32,12 @@ $articles = $stmt->fetchAll();
                 <a href="profile.php" class="username-link"><?= htmlspecialchars($_SESSION['username']) ?></a>
             </div>
         <?php else: ?>
-            <a href="login.php">Connexion</a>
-            <a href="register.php">Inscription</a>
+            <a href="login">Connexion</a>
+            <a href="register">Inscription</a>
         <?php endif; ?>
         <!-- Si l'utilisateur est pas connecté, pour que Panier soit affiché a droite -->
         <?php if (!isset($_SESSION['user_id'])): ?>
-            <a href="cart.php">Panier</a>
+            <a href="cart">Panier</a>
         <?php endif; ?>
     </nav>
 </header>
@@ -54,7 +55,7 @@ $articles = $stmt->fetchAll();
             <p><?= htmlspecialchars(substr($article["description"], 0, 100)) ?>...</p>
             <p>Prix: <?= number_format($article["price"], 2) ?> €</p>
             <p>Vendu par: <a href="#" class="seller-link" data-user-id="<?= $article["user_id"] ?>"><?= htmlspecialchars($article["username"]) ?></a></p>
-            <a href="product.php?id=<?= $article["id"] ?>">Voir plus</a>
+            <a href="product?id=<?= $article["id"] ?>">Voir plus</a>
             <form action="add_to_cart.php" method="post">
                 <input type="hidden" name="article_id" value="<?= $article['id'] ?>">
                 <button type="submit">Ajouter au panier</button>

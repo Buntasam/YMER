@@ -3,7 +3,7 @@ session_start();
 require 'db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: login");
     exit;
 }
 
@@ -14,6 +14,6 @@ $article_id = $_POST['article_id'];
 $stmt = $pdo->prepare("DELETE FROM cart WHERE user_id = ? AND article_id = ?");
 $stmt->execute([$user_id, $article_id]);
 
-header("Location: cart.php");
+header("Location: product/create");
 exit;
 ?>

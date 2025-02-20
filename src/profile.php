@@ -3,7 +3,7 @@ session_start();
 require 'db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: login");
     exit;
 }
 
@@ -83,19 +83,20 @@ $user = $stmt->fetch();
 <body>
 <header>
     <nav>
-        <a href="index.php">Accueil</a>
+        <a href="/">Accueil</a>
         <?php if (isset($_SESSION['user_id'])): ?>
-            <a href="sell.php">Vendre</a>
-            <a href="profile.php">Profil</a>
+            <a href="product/create">Vendre</a>
+            <a href="profile">Profil</a>
             <?php if ($_SESSION['role'] === 'admin'): ?>
-                <a href="admin.php">Admin</a>
+                <a href="admin">Admin</a>
             <?php endif; ?>
-            <a href="cart.php">Panier</a>
+            <a href="product/create">Panier</a>
             <a href="logout.php">Déconnexion</a>
         <?php else: ?>
-            <a href="login.php">Connexion</a>
-            <a href="register.php">Inscription</a>
+            <a href="login">Connexion</a>
+            <a href="register">Inscription</a>
         <?php endif; ?>
+        <a href="cart">Panier</a>
     </nav>
 </header>
 
@@ -140,7 +141,7 @@ $user = $stmt->fetch();
         <p>Rôle : <?= htmlspecialchars($user['role']) ?></p>
         <p>Crédit : <?= htmlspecialchars($user['balance']) ?> € disponible</p>
     </div>
-    <p><a href="index.php">Retour à l'accueil</a></p>
+    <p><a href="/">Retour à l'accueil</a></p>
 </div>
 
 </body>

@@ -3,7 +3,7 @@ session_start();
 require 'db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: login");
     exit;
 }
 
@@ -47,24 +47,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ymerch - Vendre</title>
+    <base href="http://localhost/ymerch/">
     <link rel="stylesheet" href="sell.css">
 </head>
 <body>
     <header>
         <nav>
-            <a href="index.php">Accueil</a>
+            <a href="/">Accueil</a>
             <?php if (isset($_SESSION['user_id'])): ?>
-                <a href="sell.php">Vendre</a>
-                <a href="profile.php">Profil</a>
+                <a href="product/create">Vendre</a>
+                <a href="profile">Profil</a>
                 <?php if ($_SESSION['role'] === 'admin'): ?>
-                    <a href="admin.php">Admin</a>
+                    <a href="admin">Admin</a>
                 <?php endif; ?>
                 <a href="logout.php">Déconnexion</a>
             <?php else: ?>
-                <a href="login.php">Connexion</a>
-                <a href="register.php">Inscription</a>
+                <a href="login">Connexion</a>
+                <a href="register">Inscription</a>
             <?php endif; ?>
-            <a href="cart.php">Panier</a>
+            <a href="cart">Panier</a>
         </nav>
     </header>
 <h2>Vendre un article</h2>

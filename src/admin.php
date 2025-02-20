@@ -4,7 +4,7 @@ include('db.php'); // Connexion à la base de données
 
 // Vérifier si l'utilisateur est admin
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header('Location: /login.php'); // Rediriger vers la page de connexion si non admin
+    header('Location: /login'); // Rediriger vers la page de connexion si non admin
     exit;
 }
 

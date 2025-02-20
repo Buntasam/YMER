@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION["user_id"] = $pdo->lastInsertId();
                 $_SESSION["username"] = $username;
                 $_SESSION["role"] = 'user';
-                header("Location: index.php");
+                header("Location: /");
                 exit;
             } else {
                 $error = "Erreur lors de l'inscription.";
@@ -58,6 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="password" name="confirm_password" required>
     <button type="submit">S'inscrire</button>
 </form>
-<p class="center-text">Déjà inscrit ? <a href="login.php">Connectez-vous ici</a>.</p>
+<p class="center-text">Déjà inscrit ? <a href="login">Connectez-vous ici</a>.</p>
 </body>
 </html>

@@ -2,3 +2,20 @@
     Order Allow,Deny
     Deny from all
 </Files>
+
+RewriteEngine On
+
+# Redirect /product/create to create_product.php
+RewriteRule ^product/create$ sell.php [L]
+RewriteRule ^login$ login.php [L]
+RewriteRule ^register$ register.php [L]
+RewriteRule ^/$ index.php [L]
+RewriteRule ^cart$ cart.php [L]
+RewriteRule ^admin$ admin.php [L]
+RewriteRule ^profile$ profile.php [L]
+
+# Allow access to CSS files
+<FilesMatch "\.(css|js|jpg|png|gif|ico|svg)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>

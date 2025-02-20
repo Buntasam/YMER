@@ -3,7 +3,7 @@ session_start();
 require 'db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: login");
     exit;
 }
 
@@ -26,6 +26,6 @@ if ($cart_item) {
     $stmt->execute([$user_id, $article_id, $quantity]);
 }
 
-header("Location: cart.php");
+header("Location: cart");
 exit;
 ?>

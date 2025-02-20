@@ -3,7 +3,7 @@ session_start();
 include('db.php'); // Connexion à la base de données
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header('Location: /login.php');
+    header('Location: /login');
     exit;
 }
 

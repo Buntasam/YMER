@@ -3,7 +3,7 @@ session_start();
 require 'db.php';
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: login");
     exit;
 }
 
@@ -57,6 +57,6 @@ $cart_items = $stmt->fetchAll();
 <?php else: ?>
     <p>Votre panier est vide.</p>
 <?php endif; ?>
-<p><a href="index.php">Continuer vos achats</a></p>
+<p><a href="/">Continuer vos achats</a></p>
 </body>
 </html>

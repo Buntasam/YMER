@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             setcookie("user_id", $user["id"], time() + 604800, "/", "", false, true);
         }
 
-        header("Location: index.php");
+        header("Location: /");
         exit;
     } else {
         $error = "Identifiants incorrects.";
@@ -49,6 +49,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <label><input type="checkbox" name="remember"> Se souvenir de moi</label>
     <button type="submit">Se connecter</button>
 </form>
-<p class="center-text">Pas encore inscrit ? <a href="register.php">Créez un compte ici</a>.</p>
+<p class="center-text">Pas encore inscrit ? <a href="register">Créez un compte ici</a>.</p>
 </body>
 </html>
