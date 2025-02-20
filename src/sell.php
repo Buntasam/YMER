@@ -16,16 +16,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = trim($_POST["description"]);
     $price = $_POST["price"];
     $user_id = $_SESSION['user_id'];
-    $image_path = 'default.jpg';
+    $image_path = 'uploads/default.jpg';
 
     if (empty($name) || empty($slug) || empty($description) || empty($price)) {
         $error = "Tous les champs sont obligatoires.";
     } else {
         if (!empty($_FILES["image"]["name"])) {
             $image = $_FILES["image"];
-            if ($image['error'] == UPLOAD_ERR_OK) {
-                $image_path = 'uploads/' . basename($image['name']);
-                move_uploaded_file($image['tmp_name'], $image_path);
+            $target_dir = "uploads/";
+            $target_file = $target_dir . basename($image["name"]);
+            if (move_uploaded_file($image["tmp_name"], $target_file)) {
+                $image_path = $target_file;
             } else {
                 $error = "Erreur lors du téléchargement de l'image.";
             }

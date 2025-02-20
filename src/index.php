@@ -2,9 +2,19 @@
 session_start();
 require 'db.php';
 
-$stmt = $pdo->prepare("SELECT a.*, u.username FROM articles a JOIN users u ON a.user_id = u.id ORDER BY a.created_at DESC");
+$limit = 30;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+
+$stmt = $pdo->prepare("SELECT a.*, u.username FROM articles a JOIN users u ON a.user_id = u.id ORDER BY a.created_at DESC LIMIT ? OFFSET ?");
+$stmt->bindParam(1, $limit, PDO::PARAM_INT);
+$stmt->bindParam(2, $offset, PDO::PARAM_INT);
 $stmt->execute();
 $articles = $stmt->fetchAll();
+
+$totalStmt = $pdo->query("SELECT COUNT(*) FROM articles");
+$totalArticles = $totalStmt->fetchColumn();
+$totalPages = ceil($totalArticles / $limit);
 ?>
 
 <!DOCTYPE html>
@@ -14,40 +24,6 @@ $articles = $stmt->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - Ymerch</title>
     <link rel="stylesheet" href="index.css">
-    <style>
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
 <header>
@@ -81,7 +57,7 @@ $articles = $stmt->fetchAll();
                 <input type="hidden" name="article_id" value="<?= $article['id'] ?>">
                 <button type="submit">Ajouter au panier</button>
             </form>
-            <?php if ($article["image_url"] !== 'default.jpg'): ?>
+            <?php if ($article["image_url"] !== 'uploads/default.jpg'): ?>
                 <img src="<?= $article["image_url"] ?>" alt="<?= htmlspecialchars($article["name"]) ?>" style="width:100%; max-height:150px; object-fit:cover;">
             <?php else: ?>
                 <div style="width:100%; height:150px; background-color:grey;"></div>
@@ -90,7 +66,11 @@ $articles = $stmt->fetchAll();
     <?php endforeach; ?>
 </div>
 
-
+<?php if ($page < $totalPages): ?>
+    <div class="load-more">
+        <a href="index.php?page=<?= $page + 1 ?>">Afficher plus</a>
+    </div>
+<?php endif; ?>
 
 <!-- Modal -->
 <div id="sellerModal" class="modal">

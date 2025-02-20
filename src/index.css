@@ -157,6 +157,37 @@ footer {
     }
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.grid-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.load-more {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.load-more a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.load-more a:hover {
+    background-color: #0056b3;
+}
+
 /* Conteneur principal */
 .products-container {
     display: flex;
