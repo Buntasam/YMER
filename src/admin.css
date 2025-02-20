@@ -1,0 +1,174 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f7f7f7;
+    color: #333;
+    transition: background-color 0.3s ease-in-out;
+}
+
+a {
+    color: #0073bb;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #ff9900;
+}
+
+h1, h2 {
+    margin: 0;
+}
+
+/* Header */
+header {
+    background-color: #232f3e;
+    color: #fff;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+header nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 0;
+}
+
+header nav ul li {
+    margin-right: 15px;
+}
+
+header nav ul li a {
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+header nav ul li a:hover {
+    color: #febd69;
+}
+
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Supprime les espaces entre les bordures */
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd; /* Bordures des cellules */
+    padding: 10px; /* Espacement interne des cellules */
+    text-align: left; /* Alignement du texte */
+}
+
+table th {
+    background-color: #232f3e; /* Couleur de fond des en-têtes */
+    color: white; /* Couleur du texte des en-têtes */
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Couleur de fond pour les lignes paires */
+}
+
+table tr:hover {
+    background-color: #f1f1f1; /* Couleur de fond au survol */
+}
+
+/* Action Links */
+table td a {
+    display: inline-block; /* Pour un meilleur contrôle des marges et espacements */
+    margin-right: 10px; /* Espacement entre les liens */
+    padding: 5px 10px; /* Espacement interne pour un bouton-like */
+    border-radius: 4px; /* Coins arrondis */
+}
+
+table td a:hover {
+    background-color: #0073bb; /* Fond bleu au survol */
+    color: white; /* Texte blanc au survol */
+}
+
+/* Modifier et supprimer boutons spécifiques */
+table td a[href*="edit_user"] {
+    background-color: #4caf50; /* Vert pour modifier */
+    color: white; 
+}
+
+table td a[href*="delete_user"] {
+    background-color: #e74c3c; /* Rouge pour supprimer */
+    color:white
+}
+
+table td a[href*="make_admin"]{
+background: #007bbb;
+color:white;
+}
+
+/* Barre de recherche */
+.search-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.search-form input[type="text"] {
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.search-form button {
+    padding: 8px 15px;
+    background-color: #0073bb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: #005999;
+}
+
+/* Boutons radio */
+.radio-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.radio-buttons label {
+    margin-right: 10px;
+}
+
+.radio-buttons input[type="radio"] {
+    margin-right: 5px;
+}

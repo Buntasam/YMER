@@ -21,7 +21,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panneau d'administration</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
 <header>
@@ -31,6 +31,23 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <li><a href="/logout.php">Déconnexion</a></li>
         </ul>
     </nav>
+    <!-- Formulaire de recherche -->
+    <form method="GET" action="" class="search-form">
+    <input type="text" name="search" placeholder="Rechercher un utilisateur..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+    <div class="radio-buttons">
+        <label>
+            <input type="radio" name="searchBy" value="id" <?php echo (isset($_GET['searchBy']) && $_GET['searchBy'] === 'id') ? 'checked' : ''; ?>> ID
+        </label>
+        <label>
+            <input type="radio" name="searchBy" value="email" <?php echo (isset($_GET['searchBy']) && $_GET['searchBy'] === 'email') ? 'checked' : ''; ?>> Email
+        </label>
+        <label>
+            <input type="radio" name="searchBy" value="username" <?php echo (isset($_GET['searchBy']) && $_GET['searchBy'] === 'username') ? 'checked' : ''; ?>> Nom d'utilisateur
+        </label>
+    </div>
+    <button type="submit">Rechercher</button>
+</form>
+
 </header>
 <main>
     <h1>Panneau d'administration</h1>
