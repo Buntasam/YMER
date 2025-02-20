@@ -71,7 +71,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <a href="edit_user.php?id=<?php echo $user['id']; ?>">Modifier</a>
                     <a href="delete_user.php?id=<?php echo $user['id']; ?>">Supprimer</a>
                     <?php if ($user['role'] !== 'admin'): ?>
-                        <a href="make_admin.php?id=<?php echo $user['id']; ?>">Promouvoir à Admin</a>
+                        <a href="make_admin.php?id=<?php echo $user['id']; ?>">Promouvoir Admin</a>
                     <?php endif; ?>
                 </td>
             </tr>
