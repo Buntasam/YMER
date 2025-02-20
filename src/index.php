@@ -2,19 +2,9 @@
 session_start();
 require 'db.php';
 
-$limit = 30;
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$offset = ($page - 1) * $limit;
-
-$stmt = $pdo->prepare("SELECT a.*, u.username FROM articles a JOIN users u ON a.user_id = u.id ORDER BY a.created_at DESC LIMIT ? OFFSET ?");
-$stmt->bindParam(1, $limit, PDO::PARAM_INT);
-$stmt->bindParam(2, $offset, PDO::PARAM_INT);
+$stmt = $pdo->prepare("SELECT a.*, u.username FROM articles a JOIN users u ON a.user_id = u.id ORDER BY a.created_at DESC");
 $stmt->execute();
 $articles = $stmt->fetchAll();
-
-$totalStmt = $pdo->query("SELECT COUNT(*) FROM articles");
-$totalArticles = $totalStmt->fetchColumn();
-$totalPages = ceil($totalArticles / $limit);
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +47,7 @@ $totalPages = ceil($totalArticles / $limit);
                 <input type="hidden" name="article_id" value="<?= $article['id'] ?>">
                 <button type="submit">Ajouter au panier</button>
             </form>
-            <?php if ($article["image_url"] !== 'uploads/default.jpg'): ?>
+            <?php if ($article["image_url"] !== 'default.jpg'): ?>
                 <img src="<?= $article["image_url"] ?>" alt="<?= htmlspecialchars($article["name"]) ?>" style="width:100%; max-height:150px; object-fit:cover;">
             <?php else: ?>
                 <div style="width:100%; height:150px; background-color:grey;"></div>
@@ -65,12 +55,6 @@ $totalPages = ceil($totalArticles / $limit);
         </div>
     <?php endforeach; ?>
 </div>
-
-<?php if ($page < $totalPages): ?>
-    <div class="load-more">
-        <a href="index.php?page=<?= $page + 1 ?>">Afficher plus</a>
-    </div>
-<?php endif; ?>
 
 <!-- Modal -->
 <div id="sellerModal" class="modal">

@@ -8,30 +8,10 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
-// Initialiser la requête SQL
-$sql = "SELECT * FROM users";
-$params = [];
-
-// Vérifier si une recherche a été effectuée
-if (isset($_GET['search']) && isset($_GET['searchBy'])) {
-    $search = trim($_GET['search']);
-    $searchBy = $_GET['searchBy'];
-
-    if ($searchBy === 'id') {
-        $sql .= " WHERE id = ?";
-        $params[] = $search;
-    } elseif ($searchBy === 'email') {
-        $sql .= " WHERE email LIKE ?";
-        $params[] = '%' . $search . '%';
-    } elseif ($searchBy === 'username') {
-        $sql .= " WHERE username LIKE ?";
-        $params[] = '%' . $search . '%';
-    }
-}
-
-$sql .= " LIMIT 25";
+// Récupérer les utilisateurs
+$sql = "SELECT * FROM users LIMIT 25";
 $stmt = $pdo->prepare($sql);
-$stmt->execute($params);
+$stmt->execute();
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -48,25 +28,26 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <nav>
         <ul>
             <li><a href="/">Accueil</a></li>
-            <li><a href="/logout.php">Déconnexion</a></li>
+            <li><a href="logout.php">Déconnexion</a></li>
         </ul>
     </nav>
     <!-- Formulaire de recherche -->
     <form method="GET" action="" class="search-form">
-        <input type="text" name="search" placeholder="Rechercher un utilisateur..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
-        <div class="radio-buttons">
-            <label>
-                <input type="radio" name="searchBy" value="id" <?php echo (isset($_GET['searchBy']) && $_GET['searchBy'] === 'id') ? 'checked' : ''; ?>> ID
-            </label>
-            <label>
-                <input type="radio" name="searchBy" value="email" <?php echo (isset($_GET['searchBy']) && $_GET['searchBy'] === 'email') ? 'checked' : ''; ?>> Email
-            </label>
-            <label>
-                <input type="radio" name="searchBy" value="username" <?php echo (isset($_GET['searchBy']) && $_GET['searchBy'] === 'username') ? 'checked' : ''; ?>> Nom d'utilisateur
-            </label>
-        </div>
-        <button type="submit">Rechercher</button>
-    </form>
+    <input type="text" name="search" placeholder="Rechercher un utilisateur..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+    <div class="radio-buttons">
+        <label>
+            <input type="radio" name="searchBy" value="id" <?php echo (isset($_GET['searchBy']) && $_GET['searchBy'] === 'id') ? 'checked' : ''; ?>> ID
+        </label>
+        <label>
+            <input type="radio" name="searchBy" value="email" <?php echo (isset($_GET['searchBy']) && $_GET['searchBy'] === 'email') ? 'checked' : ''; ?>> Email
+        </label>
+        <label>
+            <input type="radio" name="searchBy" value="username" <?php echo (isset($_GET['searchBy']) && $_GET['searchBy'] === 'username') ? 'checked' : ''; ?>> Nom d'utilisateur
+        </label>
+    </div>
+    <button type="submit">Rechercher</button>
+</form>
+
 </header>
 <main>
     <h1>Panneau d'administration</h1>
