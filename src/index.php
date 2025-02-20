@@ -69,26 +69,28 @@ $articles = $stmt->fetchAll();
 </header>
 
 <h1>Bienvenue sur Ymerch</h1>
-<div>
+<div class="products-container">
     <?php foreach ($articles as $article): ?>
-        <h2><?= htmlspecialchars($article["name"]) ?></h2>
-        <p><?= htmlspecialchars(substr($article["description"], 0, 100)) ?>...</p>
-        <p>Prix: <?= number_format($article["price"], 2) ?> €</p>
-        <p>Vendu par: <a href="#" class="seller-link" data-user-id="<?= $article["user_id"] ?>"><?= htmlspecialchars($article["username"]) ?></a></p>
-        <a href="product.php?id=<?= $article["id"] ?>">Voir plus</a>
-        <form action="add_to_cart.php" method="post">
-            <input type="hidden" name="article_id" value="<?= $article['id'] ?>">
-            <input type="hidden" name="article_name" value="<?= htmlspecialchars($article['name']) ?>">
-            <input type="hidden" name="article_price" value="<?= $article['price'] ?>">
-            <button type="submit">Ajouter au panier</button>
-        </form>
-        <?php if ($article["image_url"] !== 'default.jpg'): ?>
-            <img src="<?= $article["image_url"] ?>" alt="<?= htmlspecialchars($article["name"]) ?>" style="width:100px;height:100px;">
-        <?php else: ?>
-            <div style="width:100px;height:100px;background-color:grey;"></div>
-        <?php endif; ?>
+        <div class="product-card">
+            <h2><?= htmlspecialchars($article["name"]) ?></h2>
+            <p><?= htmlspecialchars(substr($article["description"], 0, 100)) ?>...</p>
+            <p>Prix: <?= number_format($article["price"], 2) ?> €</p>
+            <p>Vendu par: <a href="#" class="seller-link" data-user-id="<?= $article["user_id"] ?>"><?= htmlspecialchars($article["username"]) ?></a></p>
+            <a href="product.php?id=<?= $article["id"] ?>">Voir plus</a>
+            <form action="add_to_cart.php" method="post">
+                <input type="hidden" name="article_id" value="<?= $article['id'] ?>">
+                <button type="submit">Ajouter au panier</button>
+            </form>
+            <?php if ($article["image_url"] !== 'default.jpg'): ?>
+                <img src="<?= $article["image_url"] ?>" alt="<?= htmlspecialchars($article["name"]) ?>" style="width:100%; max-height:150px; object-fit:cover;">
+            <?php else: ?>
+                <div style="width:100%; height:150px; background-color:grey;"></div>
+            <?php endif; ?>
+        </div>
     <?php endforeach; ?>
 </div>
+
+
 
 <!-- Modal -->
 <div id="sellerModal" class="modal">

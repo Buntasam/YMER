@@ -61,8 +61,5 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php endforeach; ?>
     </table>
 </main>
-<footer>
-    <p>&copy; 2025 Ymerch. Tous droits réservés.</p>
-</footer>
 </body>
 </html>

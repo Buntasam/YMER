@@ -156,3 +156,52 @@ footer {
         opacity: 1;
     }
 }
+
+/* Conteneur principal */
+.products-container {
+    display: flex;
+    flex-wrap: wrap; /* Permet de passer à une nouvelle ligne si nécessaire */
+    gap: 20px; /* Espacement entre les cartes */
+    justify-content: space-between; /* Espace entre les éléments */
+    padding: 20px;
+}
+
+/* Style des cartes produits */
+.product-card {
+    display: flex;
+    flex-direction: column; /* Contenu empilé verticalement */
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: calc(33.333% - 20px); /* Trois colonnes avec espace entre elles */
+    box-sizing: border-box; /* Inclut padding et bordures dans la largeur totale */
+}
+
+/* Image du produit */
+.product-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* Titre du produit */
+.product-card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Texte et bouton */
+.product-card p {
+    font-size: 14px;
+    color: #555;
+}
+
+.product-card a,
+.product-card button {
+    display: inline-block;
+    margin-top: 10px;
+}
