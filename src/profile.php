@@ -90,12 +90,12 @@ $user = $stmt->fetch();
             <?php if ($_SESSION['role'] === 'admin'): ?>
                 <a href="admin.php">Admin</a>
             <?php endif; ?>
+            <a href="cart.php">Panier</a>
             <a href="logout.php">Déconnexion</a>
         <?php else: ?>
             <a href="login.php">Connexion</a>
             <a href="register.php">Inscription</a>
         <?php endif; ?>
-        <a href="cart.php">Panier</a>
     </nav>
 </header>
 

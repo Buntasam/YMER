@@ -55,6 +55,32 @@ header nav a:hover {
     transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
+/* Style pour la section user dans le footer */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info img.profile-picture {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.username-link {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.username-link:hover {
+    color: #febd69;
+    text-decoration: underline;
+}
+
+
 /* Admin Button */
 .admin-button {
     display: inline-block;
@@ -82,7 +108,7 @@ h1 {
 
 div {
     max-width: 1200px;
-    margin: 20px auto;
+/*    margin: 15px; */
     padding: 0 20px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -112,9 +138,8 @@ div a {
     font-size: 14px;
     color: #0073bb;
     font-weight: bold;
-    opacity: 0;
+    opacity: 100;
     transform: scale(0.9);
-    animation: fade-in 0.5s ease-in-out forwards;
     animation-delay: 0.4s;
 }
 
@@ -122,16 +147,6 @@ div a:hover {
     color: #ff9900;
     transform: scale(1.1);
     transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-
-/* Footer */
-footer {
-    background-color: #232f3e;
-    color: #fff;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: 20px;
-    font-size: 14px;
 }
 
 /* Animations */

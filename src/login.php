@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["user_id"] = $user["id"];
         $_SESSION["username"] = $user["username"];
         $_SESSION["role"] = $user["role"];
+        $_SESSION['avatar'] = $user['avatar'];
 
         // Si "Se souvenir de moi" est coché, on crée un cookie valable 7 jours
         if ($remember) {

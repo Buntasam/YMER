@@ -21,20 +21,32 @@ $articles = $stmt->fetchAll();
         <a href="index.php">Accueil</a>
         <?php if (isset($_SESSION['user_id'])): ?>
             <a href="sell.php">Vendre</a>
-            <a href="profile.php">Profil</a>
             <?php if ($_SESSION['role'] === 'admin'): ?>
                 <a href="admin.php">Admin</a>
             <?php endif; ?>
+            <a href="cart.php">Panier</a>
             <a href="logout.php">Déconnexion</a>
+            <div class="user-info">
+                <img src="<?= htmlspecialchars($_SESSION['avatar']) ?>" alt="Photo de profil" class="profile-picture">
+                <a href="profile.php" class="username-link"><?= htmlspecialchars($_SESSION['username']) ?></a>
+            </div>
         <?php else: ?>
             <a href="login.php">Connexion</a>
             <a href="register.php">Inscription</a>
         <?php endif; ?>
-        <a href="cart.php">Panier</a>
+        <!-- Si l'utilisateur est pas connecté, pour que Panier soit affiché a droite -->
+        <?php if (!isset($_SESSION['user_id'])): ?>
+            <a href="cart.php">Panier</a>
+        <?php endif; ?>
     </nav>
 </header>
 
-<h1>Bienvenue sur Ymerch</h1>
+<?php if (isset($_SESSION['user_id'])): ?>
+    <h1>Bienvenue sur Ymerch <?= htmlspecialchars($_SESSION['username']) ?></h1>
+    <?php else: ?>
+        <h1>Bienvenue sur Ymerch</h1>
+    <?php endif; ?>
+
 <div class="products-container">
     <?php foreach ($articles as $article): ?>
         <div class="product-card">
