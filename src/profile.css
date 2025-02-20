@@ -55,34 +55,6 @@ h2 {
     margin-top: 20px;
 }
 
-/* Header */
-header {
-    background-color: #232f3e;
-    color: #fff;
-    padding: 10px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-header nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header nav a {
-    margin: 0 15px;
-    color: #fff;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-header nav a:hover {
-    color: #febd69;
-}
-
 /* Profile Container */
 .profile-container {
     max-width: 600px;
