@@ -1,0 +1,139 @@
+/* Header */
+header {
+    background-color: #232f3e;
+    color: #fff;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease-in-out;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav a {
+    margin: 0 15px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    color: #febd69;
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+a {
+    color: #0073bb;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #ff9900;
+}
+
+h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+/* Header */
+header {
+    background-color: #232f3e;
+    color: #fff;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav a {
+    margin: 0 15px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    color: #febd69;
+}
+
+/* Profile Container */
+.profile-container {
+    max-width: 600px; /* Largeur maximale du bloc */
+    margin: 50px auto; /* Centrer le bloc */
+    background-color: #fff; /* Fond blanc */
+    padding: 20px; /* Espacement interne */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+/* Profile Image */
+.profile-container img {
+    display: block; /* Centrer l'image */
+    margin: 20px auto; /* Espacement autour de l'image */
+    width: 150px; /* Taille fixe de l'image */
+    height: 150px; 
+    border-radius: 50%; /* Image ronde */
+    object-fit: cover; /* Remplir le cadre rond correctement */
+}
+
+/* Formulaire d'édition du profil */
+form {
+    display: flex; /* Aligner les éléments verticalement */
+    flex-direction: column; 
+}
+
+form input[type="file"] {
+    margin-bottom: 15px; /* Espacement sous le champ de fichier */
+}
+
+form button {
+    background-color: #4caf50; /* Couleur du bouton (vert) */
+    color: white; 
+    border-radius: 5px; 
+    padding: 10px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    border: none; 
+    cursor: pointer; 
+}
+
+form button:hover {
+    background-color: #55ca58; /* Couleur plus claire au survol */
+}
+
+/* Informations utilisateur */
+.user-info p {
+    font-size: 16px; 
+}
+
+/* Messages d'erreur et de succès */
+.profile-container p[style="color:red"] {
+   text-align:center
+}
