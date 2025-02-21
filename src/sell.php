@@ -15,10 +15,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $slug = trim($_POST["slug"]);
     $description = trim($_POST["description"]);
     $price = $_POST["price"];
+    $quantity = intval($_POST["quantity"]);
     $user_id = $_SESSION['user_id'];
     $image_path = 'default.jpg';
+    $availability = true;
 
-    if (empty($name) || empty($slug) || empty($description) || empty($price)) { // Check if all fields are filled
+    if (empty($name) || empty($slug) || empty($description) || empty($price)) {
         $error = "Tous les champs sont obligatoires.";
     } else {
         if (!empty($_FILES["image"]["name"])) {
@@ -31,9 +33,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        $stmt = $pdo->prepare("INSERT INTO articles (name, slug, description, price, image_url, user_id) VALUES (?, ?, ?, ?, ?, ?)"); // Insert article into database
-        if ($stmt->execute([$name, $slug, $description, $price, $image_path, $user_id])) {
-            $success = "Article ajouté avec succès.";
+        $stmt = $pdo->prepare("INSERT INTO articles (name, slug, description, price, image_url, user_id, availability) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        if ($stmt->execute([$name, $slug, $description, $price, $image_path, $user_id, $availability])) {
+            $article_id = $pdo->lastInsertId();
+            $stmt = $pdo->prepare("INSERT INTO stock (product_id, quantity) VALUES (?, ?)");
+            if ($stmt->execute([$article_id, $quantity])) {
+                $success = "Article ajouté avec succès.";
+            } else {
+                $error = "Erreur lors de l'ajout du stock.";
+            }
         } else {
             $error = "Erreur lors de l'ajout de l'article.";
         }
@@ -56,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="/">Accueil</a>
             <?php if (isset($_SESSION['user_id'])): ?>
                 <a href="product/create">Vendre</a>
-                <a href="profile">Profil</a>
+                <a href="user.php">Profil</a>
                 <?php if ($_SESSION['role'] === 'admin'): ?>
                     <a href="admin">Admin</a>
                 <?php endif; ?>
@@ -76,6 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="text" name="slug" placeholder="Slug" required>
     <textarea name="description" placeholder="Description" required></textarea>
     <input type="number" step="0.01" name="price" placeholder="Prix" required>
+    <input type="number" name="quantity" placeholder="Quantité" required>
     <input type="file" name="image" accept="image/*">
     <button type="submit">Ajouter</button>
 </form>

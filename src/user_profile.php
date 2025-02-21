@@ -2,22 +2,21 @@
 session_start();
 require 'db.php';
 
-if (!isset($_GET['id'])) {
-    echo "Utilisateur non trouvé.";
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
     exit;
 }
 
-$user_id = $_GET['id'];
-$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
-$stmt->execute([$user_id]);
-$user = $stmt->fetch();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $user_id = $_SESSION['user_id'];
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-if (!$user) {
-    echo "Utilisateur non trouvé.";
+    $stmt = $pdo->prepare("UPDATE users SET email = ?, password = ? WHERE id = ?");
+    $stmt->execute([$email, $password, $user_id]);
+
+    $_SESSION['success'] = "Profil mis à jour avec succès.";
+    header("Location: user.php");
     exit;
 }
 ?>
-
-<h2>Profil de <?= htmlspecialchars($user['username']) ?></h2>
-<p>Email: <?= htmlspecialchars($user['email']) ?></p>
-<p>Rôle: <?= htmlspecialchars($user['role']) ?></p>

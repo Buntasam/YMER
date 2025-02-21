@@ -1,3 +1,59 @@
+/* Header */
+header {
+    background-color: #232f3e;
+    color: #fff;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease-in-out;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav a {
+    margin: 0 15px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    color: #febd69;
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Style pour la section user dans le footer */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info img.profile-picture {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.username-link {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.username-link:hover {
+    color: #febd69;
+    text-decoration: underline;
+}
+
 /* Global Styles */
 body {
     font-family: Arial, sans-serif;
@@ -82,7 +138,6 @@ h1 {
 
 div {
     max-width: 1200px;
-    margin: 20px auto;
     padding: 0 20px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
