@@ -2,14 +2,19 @@
 session_start();
 require 'db.php';
 
-$stmt = $pdo->prepare("SELECT a.*, u.username, s.quantity 
-                       FROM articles a 
-                       JOIN users u ON a.user_id = u.id 
-                       JOIN stock s ON a.id = s.product_id 
-                       WHERE a.availability = 1 AND s.quantity > 0 
+$stmt = $pdo->prepare("SELECT a.*, u.username, u.avatar, s.quantity
+                       FROM articles a
+                       JOIN users u ON a.user_id = u.id
+                       JOIN stock s ON a.id = s.product_id
+                       WHERE a.availability = 1 AND s.quantity > 0
                        ORDER BY a.created_at DESC");
 $stmt->execute();
 $articles = $stmt->fetchAll();
+
+function generateSlug($string) {
+    $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($string));
+    return trim($slug, '-');
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +31,6 @@ $articles = $stmt->fetchAll();
         <a href="/">Accueil</a>
         <?php if (isset($_SESSION['user_id'])): ?>
             <a href="product/create">Vendre</a>
-            <a href="user">Profil</a>
             <?php if ($_SESSION['role'] === 'admin'): ?>
                 <a href="admin">Admin</a>
             <?php endif; ?>
@@ -59,12 +63,8 @@ $articles = $stmt->fetchAll();
             <p><?= htmlspecialchars(substr($article["description"], 0, 100)) ?>...</p>
             <p>Prix: <?= number_format($article["price"], 2) ?> €</p>
             <p>Quantité: <?= $article["quantity"] ?></p>
-            <p>Vendu par: <a href="#" class="seller-link" data-user-id="<?= $article["user_id"] ?>"><?= htmlspecialchars($article["username"]) ?></a></p>
-            <a href="product?id=<?= $article["id"] ?>">Voir plus</a>
-            <form action="add_to_cart.php" method="post">
-                <input type="hidden" name="article_id" value="<?= $article['id'] ?>">
-                <button type="submit">Ajouter au panier</button>
-            </form>
+            <p>Vendu par: <a href="user?u=<?= htmlspecialchars($article["username"]) ?>" class="seller-link"><?= htmlspecialchars($article["username"]) ?></a></p>
+            <a href="product/<?= $article["id"] ?>/<?= generateSlug($article["name"]) ?>">Voir plus</a>
             <?php if ($article["image_url"] !== 'default.jpg'): ?>
                 <img src="<?= $article["image_url"] ?>" alt="<?= htmlspecialchars($article["name"]) ?>" style="width:100%; max-height:150px; object-fit:cover;">
             <?php else: ?>
@@ -74,40 +74,5 @@ $articles = $stmt->fetchAll();
     <?php endforeach; ?>
 </div>
 
-<!-- Modal -->
-<div id="sellerModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <div id="sellerProfile"></div>
-    </div>
-</div>
-
-<script>
-    var modal = document.getElementById("sellerModal");
-    var span = document.getElementsByClassName("close")[0];
-
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-
-    document.querySelectorAll('.seller-link').forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            var userId = this.getAttribute('data-user-id');
-            fetch('user_profile.php?id=' + userId)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('sellerProfile').innerHTML = data;
-                    modal.style.display = "block";
-                });
-        });
-    });
-</script>
 </body>
 </html>

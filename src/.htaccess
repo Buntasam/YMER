@@ -12,6 +12,7 @@ RewriteRule ^/$ index.php [L]
 RewriteRule ^cart$ cart.php [L]
 RewriteRule ^admin$ admin.php [L]
 RewriteRule ^user$ user.php [L]
+RewriteRule ^product/([0-9]+)/([a-zA-Z0-9-]+)$ product_details.php?id=$1 [L]
 
 <FilesMatch "\.(css|js|jpg|png|gif|ico|svg)$">
     Order Allow,Deny
