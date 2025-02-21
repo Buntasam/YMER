@@ -2,6 +2,15 @@
 
 # Projet E-Commerce PHP
 
+## Installation
+dans XAMMP, créez un dossier ymerch dans le dossier htdocs
+placez le projet dans le dossier ymerch
+créez une base de données nommée ymerch puis importer la base donnée ymerch.sql
+éditer le index.php dans le dossier htdocs pour rediriger vers le dossier ymerch
+lancez le serveur apache et mysql
+ouvrez votre navigateur et accédez à l'adresse suivante : localhost/ymerch
+
+
 ## Description
 
 Ce projet consiste en la création d'un site de e-commerce entièrement développé en PHP, dans le cadre de l'évaluation finale du module PHP. Le site permet aux utilisateurs de s'inscrire, se connecter, ajouter des produits à leur panier, passer des commandes et gérer leurs informations. Les administrateurs peuvent gérer les utilisateurs et les produits.
