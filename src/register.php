@@ -21,11 +21,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $error = "Nom d'utilisateur ou email déjà utilisé.";
         } else {
             $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-            $stmt = $pdo->prepare("INSERT INTO users (username, email, password, role, balance, avatar) VALUES (?, ?, ?, 'user', 0, 'uploads/profilepic/default.jpg')"); // Default avatar and create user
-            if ($stmt->execute([$username, $email, $hashed_password])) {
+            $default_avatar = 'uploads/profilepic/default.jpg';
+            $stmt = $pdo->prepare("INSERT INTO users (username, email, password, role, balance, avatar) VALUES (?, ?, ?, 'user', 0, ?)"); // Default avatar and create user
+            if ($stmt->execute([$username, $email, $hashed_password, $default_avatar])) {
                 $_SESSION["user_id"] = $pdo->lastInsertId();
                 $_SESSION["username"] = $username;
                 $_SESSION["role"] = 'user';
+                $_SESSION['avatar'] = $default_avatar;
                 header("Location: /");
                 exit;
             } else {
