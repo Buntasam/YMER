@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdo->commit();
 
         echo "Commande passée avec succès !";
-        header('Location: success.php');
+        header('Location: success_order.php');
         exit;
     } catch (Exception $e) {
         // Annuler la transaction en cas d'erreur
@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
+    <title>Achat - Ymerch</title>
 </head>
 <body>
 <h1>Validation du panier</h1>
